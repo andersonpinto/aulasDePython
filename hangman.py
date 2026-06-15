@@ -1,39 +1,44 @@
 def hangman(word):
-    wrong = 0
-    stages =    ["",
-                "________        ",
-                "|               ",
-                "|        |      ",
-                "|        0      ",
-                "|       /|\\    ",
-                "|       / \\    ",
-                "|               "
+    stages = [
+        "",
+        "________        ",
+        "|               ",
+        "|        |      ",
+        "|        O      ",
+        "|       /|\\     ",
+        "|       / \\     ",
+        "|               "
     ]
-    rletters = list(word)
-    board = [" __ "] * len(word)
-    win = False
-    print("Bem-vindo ao jogo da forca")
+
+    board = ["_"] * len(word)
+    wrong = 0
+
+    print("Welcome to Hangman!")
 
     while wrong < len(stages) - 1:
-        print("\n")
-        msg = "Adivinhe a palavra secreta: "
-        char = input(msg)
-        if char in rletters:
-            cind= rletters.index(char)
-            board[cind] = char
-            rletters[cind] = '$'
-        else:
-            wrong +=1
-        print((" ".join(board)))
-        e = wrong + 1
-        print("\n".join(stages[0:e]))
-        if " __ " not in board:
-            print("Você ganhou!!!")
-            print(" ".join(board))
-            win = True
-            break
-            if not win:
-                print("\n".join(stages[0:wrong]))
-                print("Você perdeu! A palavra secreta é {}.".format(word))
 
-hangman("baal")
+        print("\nPalavra:", " ".join(board))
+        guess = input("Guess a letter: ").lower()
+
+        found = False
+
+        for i in range(len(word)):
+            if word[i].lower() == guess:
+                board[i] = word[i]
+                found = True
+
+        if not found:
+            wrong += 1
+
+        print("\n".join(stages[:wrong + 1]))
+
+        if "_" not in board:
+            print("\nYou won!")
+            print("Palavra:", "".join(board))
+            return
+
+    print("\nYou lose!")
+    print("The word was:", word)
+
+
+hangman("letter")
