@@ -12,11 +12,11 @@ def hangman(word):
     rletters = list(word)
     board = [" __ "] * len(word)
     win = False
-    print("Welcome to Hangman")
+    print("Bem-vindo ao jogo da forca")
 
     while wrong < len(stages) - 1:
         print("\n")
-        msg = "Guess a letter: "
+        msg = "Adivinhe a palavra secreta: "
         char = input(msg)
         if char in rletters:
             cind= rletters.index(char)
@@ -28,12 +28,12 @@ def hangman(word):
         e = wrong + 1
         print("\n".join(stages[0:e]))
         if " __ " not in board:
-            print("You won!!!")
+            print("Você ganhou!!!")
             print(" ".join(board))
             win = True
             break
             if not win:
                 print("\n".join(stages[0:wrong]))
-                print("You lose! It was {}.".format(word))
+                print("Você perdeu! A palavra secreta é {}.".format(word))
 
-hangman("cat")
+hangman("baal")
